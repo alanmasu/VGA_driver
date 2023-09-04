@@ -42,7 +42,9 @@ entity vga_driver is
            b_out : out STD_LOGIC_VECTOR (3 downto 0);
            hs : out STD_LOGIC;
            vs : out STD_LOGIC;
-           active : out STD_LOGIC
+           active : out STD_LOGIC;
+           h_count_out : out STD_LOGIC_VECTOR(9 downto 0);
+           v_count_out : out STD_LOGIC_VECTOR(9 downto 0)
      );
 end vga_driver;
 
@@ -117,5 +119,7 @@ begin
     --Sync sign.
     vs <= '0' when v_count >= v_front_porch and v_count < v_sync_pulse else '1';
     hs <= '0' when h_count >= h_front_porch and h_count < h_sync_pulse else '1';
-
+    h_count_out <= std_logic_vector(h_count);
+    v_count_out <= std_logic_vector(v_count);
+    
 end Behavioral;
